@@ -1,67 +1,67 @@
-console.log('Website made by Conor Bailey (www.conbailey.com)')
+console.log("Website made by Conor Bailey (www.conbailey.com)");
 
 // Navigation Selectors / settings
-const menuToggle = document.querySelector('.menu-toggle');
-const navigation = document.querySelector('.navigation');
+const menuToggle = document.querySelector(".menu-toggle");
+const navigation = document.querySelector(".navigation");
 const navLink = document.querySelectorAll(".nav-link");
-const navLogo = document.querySelector('.logo');
+const navLogo = document.querySelector(".logo");
 
+const leftArrow = document.querySelector(".left-arrow");
+const rightArrow = document.querySelector(".right-arrow");
+const current = document.querySelector("#current");
 
-console.log(navLogo);
+leftArrow.addEventListener("click", leftArrowClick);
+rightArrow.addEventListener("click", rightArrowClick);
 
-menuToggle.addEventListener('click', menTog);
+function leftArrowClick(e) {
+  let num = parseInt(current.src.slice(-5));
+  console.log(num);
+  if (num > 1) {
+    current.src = `./images/Mileva0${num - 1}.jpg`;
+  } else {
+    current.src = `./images/Mileva0${7}.jpg`;
+  }
+  current.classList.add("fade-in");
+
+  setTimeout(() => current.classList.remove("fade-in"), 500);
+}
+
+function rightArrowClick(e) {
+  let num = parseInt(current.src.slice(-5));
+  console.log(num);
+  if (num < 7) {
+    current.src = `./images/Mileva0${num + 1}.jpg`;
+  } else {
+    current.src = `./images/Mileva0${1}.jpg`;
+  }
+  current.classList.add("fade-in");
+
+  setTimeout(() => current.classList.remove("fade-in"), 500);
+}
+
+menuToggle.addEventListener("click", menTog);
 navLink.forEach(function(elem) {
-    elem.addEventListener("click", menTog);
-  });
+  elem.addEventListener("click", menTog);
+});
 
-navLogo.addEventListener('click', menTog);
+navLogo.addEventListener("click", menTog);
 
-window.onscroll = function(){
+window.onscroll = function() {
   let top = window.scrollY;
 
-  if (top < 50){
-    navigation.classList.remove('scrolled');
-  }else{
-    navigation.classList.add('scrolled');
+  if (top < 50) {
+    navigation.classList.remove("scrolled");
+  } else {
+    navigation.classList.add("scrolled");
   }
-}
+};
 
 function menTog() {
-    menuToggle.classList.toggle("active");
-    navigation.classList.toggle("active");
-  }
-
-
-// Press photo gallery settings
-
-const current = document.querySelector('#current');
-const opacity = 0.6;
-
-const imgs = document.querySelectorAll('.imgs img');
-
-//Set first image opacity
-
-imgs[0].style.opacity = opacity;
-
-imgs.forEach(img => img.addEventListener('click', imgClick));
-
-function imgClick(e){
-  imgs.forEach(img => (img.style.opacity = 1 ));
-
-  current.src = e.target.src;
-
-  // Add fade in class
-
-  current.classList.add('fade-in');
-
-  // Remove fade in class after 0.5s
-
-  setTimeout(()=> current.classList.remove('fade-in'), 500);
-
-  e.target.style.opacity =opacity;
+  menuToggle.classList.toggle("active");
+  navigation.classList.toggle("active");
 }
 
-  // Smooth scroll script
+// Smooth scroll script
 const scroll = new SmoothScroll('a[href*="#"]', {
-    speed: 800
-  });
+  speed: 800
+});
