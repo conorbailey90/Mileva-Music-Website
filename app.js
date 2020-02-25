@@ -15,13 +15,13 @@ rightArrow.addEventListener("click", rightArrowClick);
 
 function leftArrowClick(e) {
   let num = parseInt(current.src.slice(-5));
+  current.classList.add("fade-in");
   console.log(num);
   if (num > 1) {
     current.src = `./images/Mileva0${num - 1}.jpg`;
   } else {
     current.src = `./images/Mileva0${7}.jpg`;
   }
-  current.classList.add("fade-in");
 
   setTimeout(() => current.classList.remove("fade-in"), 500);
 }
